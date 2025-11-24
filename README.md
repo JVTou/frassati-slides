@@ -17,12 +17,12 @@ frassati-slides/
 ├── add-presentation.js    # Helper script to add new presentations
 ├── DEPLOYMENT.md          # Detailed deployment instructions
 ├── README.md              # This file
+├── dist/                  # Shared Reveal.js library files
+├── plugin/                # Shared Reveal.js plugins
+├── css/                   # Shared CSS files (layout, themes)
 └── September 2nd/         # Individual presentation folder
     ├── index.html         # Presentation slides
-    ├── css/               # Presentation-specific styles
-    ├── dist/              # Reveal.js library files
-    ├── plugin/            # Reveal.js plugins
-    └── Attachments/       # Presentation assets
+    └── Attachments/       # Presentation-specific assets
 ```
 
 ## ➕ Adding New Presentations
@@ -45,8 +45,10 @@ frassati-slides/
 ## 🎨 Customization
 
 - **Main page styling**: Edit the CSS in `index.html`
-- **Presentation themes**: Each presentation can have its own CSS files
+- **Shared CSS files**: Edit files in the root `css/` folder to affect all presentations
 - **Reveal.js options**: Configure in each presentation's `index.html`
+- **Reveal.js library**: Shared in the root `dist/` folder (update once, affects all)
+- **Plugins**: Shared in the root `plugin/` folder (update once, affects all)
 
 ## 🌐 Deployment
 
@@ -60,6 +62,8 @@ The site is configured for easy deployment on Netlify. See `DEPLOYMENT.md` for c
 ## 🔧 Requirements
 
 - Each presentation folder needs its own `index.html`
+- Presentations use shared `dist/`, `plugin/`, and `css/` folders at the root level
+- Presentation HTML files reference shared resources using `../dist/`, `../plugin/`, and `../css/` paths
 - Presentations should use relative paths for assets
 - The main `index.html` serves as the landing page
 

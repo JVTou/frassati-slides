@@ -1,0 +1,61 @@
+<svg height="600" width="600" xmlns="http://www.w3.org/2000/svg">
+<title>Your Diagram Title</title>
+<!-- Generated with SankeyMATIC: 11/24/2025, 10:34:42 AM -->
+<rect height="600" width="600" fill="#ffffff"></rect>
+<g transform="translate(137.82022,18)">
+<g id="sankey_flows">
+<path id="flow5" d="M180.57978 299.5254C258.86967 299.5254 258.86967 327.05832 337.15956 327.05832" fill="none" stroke-width="171.28936" stroke="#2ca02c" opacity="0.45"><title>Total Budget → Alcohol: 400.00</title></path>
+<path id="flow0" d="M12 94.82628C90.28989 94.82628 90.28989 162.12135 168.57978 162.12135" fill="none" stroke-width="119.90255" stroke="#e377c2" opacity="0.45"><title>Venmo → Total Budget: 280.00</title></path>
+<path id="flow4" d="M180.57978 158.0254C258.86967 158.0254 258.86967 115.80832 337.15956 115.80832" fill="none" stroke-width="111.71064" stroke="#ff7f0e" opacity="0.45"><title>Total Budget → Snack Boards: 260.87</title></path>
+<path id="flow1" d="M12 268.42045C90.28989 268.42045 90.28989 265.96553 168.57978 265.96553" fill="none" stroke-width="87.7858" stroke="#bcbd22" opacity="0.45"><title>Card → Total Budget: 205.00</title></path>
+<path id="flow2" d="M12 402.40396C90.28989 402.40396 90.28989 330.19904 168.57978 330.19904" fill="none" stroke-width="40.68122" stroke="#17becf" opacity="0.45"><title>Cash → Total Budget: 95.00</title></path>
+<path id="flow3" d="M12 509.80979C90.28989 509.80979 90.28989 367.85486 168.57978 367.85486" fill="none" stroke-width="34.63043" stroke="#1f77b4" opacity="0.45"><title>Deficit/Overspend → Total Budget: 80.87</title></path>
+</g>
+<g id="sankey_nodes">
+<g class="node">
+<rect id="r0" class="for_r0" x="0" y="34.875" height="119.90255" width="12" fill="#e377c2" fill-opacity="1"><title>Venmo:
+280.00</title></rect>
+</g>
+<g class="node">
+<rect id="r1" class="for_r1" x="168.57978" y="102.17008" height="283" width="12" fill="#7f7f7f" fill-opacity="1"><title>Total Budget:
+660.87</title></rect>
+</g>
+<g class="node">
+<rect id="r2" class="for_r2" x="0" y="224.52755" height="87.7858" width="12" fill="#bcbd22" fill-opacity="1"><title>Card:
+205.00</title></rect>
+</g>
+<g class="node">
+<rect id="r3" class="for_r3" x="0" y="382.06335" height="40.68122" width="12" fill="#17becf" fill-opacity="1"><title>Cash:
+95.00</title></rect>
+</g>
+<g class="node">
+<rect id="r4" class="for_r4" x="0" y="492.49457" height="34.63043" width="12" fill="#1f77b4" fill-opacity="1"><title>Deficit/Overspend:
+80.87</title></rect>
+</g>
+<g class="node">
+<rect id="r5" class="for_r5" x="337.15956" y="59.953" height="111.71064" width="12" fill="#ff7f0e" fill-opacity="1"><title>Snack Boards:
+260.87</title></rect>
+</g>
+<g class="node">
+<rect id="r6" class="for_r6" x="337.15956" y="241.41364" height="171.28936" width="12" fill="#2ca02c" fill-opacity="1"><title>Alcohol:
+400.00</title></rect>
+</g>
+</g>
+<g id="sankey_labels" font-family="sans-serif" font-size="16px" fill="#000000">
+<text text-anchor="middle" x="162.17978" y="577" font-size="12px" font-weight="400" fill="#336781">Made at SankeyMATIC.com</text>
+<rect id="label0_bg" class="for_r0" x="-65.20772" y="73.72628" width="63.57388" height="41.88" rx="4" fill="#fff" fill-opacity="0.75" stroke="none" stroke-width="0" stroke-opacity="0"></rect>
+<text id="label0" class="for_r0" text-anchor="end" x="-6.30197" y="94.82628" font-weight="400" font-size="14.4px" dy="-5.42">Venmo<tspan x="-6.30197" dy="19.32" font-weight="400" font-size="17.6px">280.00</tspan></text>
+<rect id="label1_bg" class="for_r1" x="129.88038" y="222.57007" width="90.59342" height="41.88" rx="4" fill="#fff" fill-opacity="0.75" stroke="none" stroke-width="0" stroke-opacity="0"></rect>
+<text id="label1" class="for_r1" text-anchor="middle" x="174.57978" y="243.67008" font-weight="400" font-size="14.4px" dy="-5.42">Total Budget<tspan x="174.57978" dy="19.32" font-weight="400" font-size="17.6px">660.87</tspan></text>
+<rect id="label2_bg" class="for_r2" x="-65.20772" y="247.32044" width="63.57388" height="41.88" rx="4" fill="#fff" fill-opacity="0.75" stroke="none" stroke-width="0" stroke-opacity="0"></rect>
+<text id="label2" class="for_r2" text-anchor="end" x="-6.30197" y="268.42045" font-weight="400" font-size="14.4px" dy="-5.42">Card<tspan x="-6.30197" dy="19.32" font-weight="400" font-size="17.6px">205.00</tspan></text>
+<rect id="label3_bg" class="for_r3" x="-55.42022" y="381.30396" width="53.78637" height="41.88" rx="4" fill="#fff" fill-opacity="0.75" stroke="none" stroke-width="0" stroke-opacity="0"></rect>
+<text id="label3" class="for_r3" text-anchor="end" x="-6.30197" y="402.40396" font-weight="400" font-size="14.4px" dy="-5.42">Cash<tspan x="-6.30197" dy="19.32" font-weight="400" font-size="17.6px">95.00</tspan></text>
+<rect id="label4_bg" class="for_r4" x="-125.82022" y="488.70975" width="124.18638" height="41.88003" rx="4" fill="#fff" fill-opacity="0.75" stroke="none" stroke-width="0" stroke-opacity="0"></rect>
+<text id="label4" class="for_r4" text-anchor="end" x="-6.30197" y="509.80979" font-weight="400" font-size="14.4px" dy="-5.42">Deficit/Overspend<tspan x="-6.30197" dy="19.32" font-weight="400" font-size="17.6px">80.87</tspan></text>
+<rect id="label5_bg" class="for_r5" x="350.79339" y="94.70833" width="99.38637" height="41.88" rx="4" fill="#fff" fill-opacity="0.75" stroke="none" stroke-width="0" stroke-opacity="0"></rect>
+<text id="label5" class="for_r5" text-anchor="start" x="355.46152" y="115.80832" font-weight="400" font-size="14.4px" dy="-5.42">Snack Boards<tspan x="355.46152" dy="19.32" font-weight="400" font-size="17.6px">260.87</tspan></text>
+<rect id="label6_bg" class="for_r6" x="349.9934" y="305.95835" width="64.37386" height="41.88" rx="4" fill="#fff" fill-opacity="0.75" stroke="none" stroke-width="0" stroke-opacity="0"></rect>
+<text id="label6" class="for_r6" text-anchor="start" x="355.46152" y="327.05832" font-weight="400" font-size="14.4px" dy="-5.42">Alcohol<tspan x="355.46152" dy="19.32" font-weight="400" font-size="17.6px">400.00</tspan></text>
+</g>
+</g></svg>
