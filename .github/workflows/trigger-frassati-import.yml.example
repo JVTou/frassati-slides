@@ -1,0 +1,30 @@
+# This workflow should be added to your Obsidian-Vault repository
+# Copy this file to: Obsidian-Vault/.github/workflows/trigger-frassati-import.yml
+#
+# This workflow triggers the auto-import in frassati-slides whenever
+# changes are pushed to the export/ directory
+
+name: Trigger Frassati Slides Import
+
+on:
+  push:
+    paths:
+      - 'export/**'  # Only trigger when export directory changes
+
+jobs:
+  trigger-import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger frassati-slides import
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.FRASSATI_SLIDES_TOKEN }}
+          repository: ${{ secrets.FRASSATI_SLIDES_REPO }}
+          event-type: obsidian-export-updated
+          client-payload: |
+            {
+              "ref": "${{ github.ref }}",
+              "sha": "${{ github.sha }}",
+              "message": "${{ github.event.head_commit.message }}"
+            }
+

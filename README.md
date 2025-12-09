@@ -42,7 +42,9 @@ When you push new exports to your Obsidian-Vault repository's `export/` director
 
 The workflow runs every hour, or you can trigger it manually from the Actions tab.
 
-**Setup:** See `.github/workflows/README.md` for configuration instructions.
+**Setup:** See `.github/workflows/README.md` for detailed configuration instructions.
+
+> **Note for Private Repositories:** If your Obsidian-Vault repository is private, you'll need to create a Personal Access Token and add it as a secret. See `.github/workflows/README.md` for step-by-step instructions.
 
 ### Manual Import (Local Development)
 
