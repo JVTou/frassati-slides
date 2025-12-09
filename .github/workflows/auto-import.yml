@@ -20,12 +20,21 @@ jobs:
         with:
           fetch-depth: 0
       
+      - name: Set Obsidian-Vault repository name
+        id: set-repo
+        run: |
+          if [ -n "${{ secrets.OBSIDIAN_VAULT_REPO }}" ]; then
+            echo "repo=${{ secrets.OBSIDIAN_VAULT_REPO }}" >> $GITHUB_OUTPUT
+          else
+            echo "repo=${{ github.repository_owner }}/Obsidian-Vault" >> $GITHUB_OUTPUT
+          fi
+      
       - name: Checkout Obsidian-Vault
         uses: actions/checkout@v4
         with:
           # If Obsidian-Vault is in the same org/user, use the same token
           # Otherwise, set OBSIDIAN_VAULT_REPO and OBSIDIAN_VAULT_TOKEN secrets
-          repository: ${{ secrets.OBSIDIAN_VAULT_REPO || github.repository_owner + '/Obsidian-Vault' }}
+          repository: ${{ steps.set-repo.outputs.repo }}
           path: obsidian-vault
           token: ${{ secrets.OBSIDIAN_VAULT_TOKEN || github.token }}
       
