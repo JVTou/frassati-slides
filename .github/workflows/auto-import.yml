@@ -1,12 +1,9 @@
 name: Auto-Import Presentations
 
 on:
-  # Run on a schedule (every hour)
-  schedule:
-    - cron: '0 * * * *'  # Every hour at minute 0
   # Allow manual triggering
   workflow_dispatch:
-  # Also trigger when Obsidian-Vault repo is updated (via repository_dispatch)
+  # Trigger when Obsidian-Vault repo is updated (via repository_dispatch)
   repository_dispatch:
     types: [obsidian-export-updated]
 

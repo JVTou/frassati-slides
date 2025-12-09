@@ -11,8 +11,8 @@ This workflow automatically imports new presentations from your Obsidian-Vault r
 2. Add the workflow to your Obsidian-Vault repository
 3. Set up the required secrets
 
-**For scheduled imports (hourly):**
-- No setup needed! The workflow runs automatically every hour.
+**For scheduled imports:**
+- The workflow no longer runs on a schedule. It only runs when triggered manually or via push to Obsidian-Vault.
 
 **For private repositories:**
 - See [For Private Repositories](#for-private-repositories-step-by-step) section below
@@ -149,8 +149,8 @@ jobs:
 
 ### How It Works
 
-- **Scheduled:** The workflow runs every hour automatically
 - **On Push (if configured):** When you push to Obsidian-Vault's `export/` directory, it triggers immediately
+- **Manual:** You can also trigger it manually from the Actions tab
 - It checks the `export/` directory in Obsidian-Vault for new date-named folders
 - Any folders that don't exist in frassati-slides are automatically imported
 - Changes are committed and pushed automatically
