@@ -14,7 +14,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const EXPORT_DIR = 'C:\\Users\\mctou\\OneDrive\\Documents\\GitHub\\Obsidian-Vault\\export';
+// Allow override via environment variable or use default
+function getExportDir() {
+    return process.env.OBSIDIAN_EXPORT_DIR || 'C:\\Users\\mctou\\OneDrive\\Documents\\GitHub\\Obsidian-Vault\\export';
+}
 const FRASSATI_SLIDES_DIR = __dirname;
 
 function formatDate(dateStr) {
@@ -143,35 +146,37 @@ function addToMainIndex(folderName, dateStr, description) {
 
 function findExportFolder(dateStr) {
     // Look for a folder matching the date in the export directory
-    if (!fs.existsSync(EXPORT_DIR)) {
+    const exportDir = getExportDir();
+    if (!fs.existsSync(exportDir)) {
         return null;
     }
     
-    const entries = fs.readdirSync(EXPORT_DIR, { withFileTypes: true });
+    const entries = fs.readdirSync(exportDir, { withFileTypes: true });
     
-    // Try exact match first
-    for (const entry of entries) {
-        if (entry.isDirectory() && entry.name === dateStr) {
-            return path.join(EXPORT_DIR, entry.name);
+        // Try exact match first
+        for (const entry of entries) {
+            if (entry.isDirectory() && entry.name === dateStr) {
+                return path.join(exportDir, entry.name);
+            }
         }
-    }
-    
-    // Try case-insensitive match
-    for (const entry of entries) {
-        if (entry.isDirectory() && entry.name.toLowerCase() === dateStr.toLowerCase()) {
-            return path.join(EXPORT_DIR, entry.name);
+        
+        // Try case-insensitive match
+        for (const entry of entries) {
+            if (entry.isDirectory() && entry.name.toLowerCase() === dateStr.toLowerCase()) {
+                return path.join(exportDir, entry.name);
+            }
         }
-    }
     
     return null;
 }
 
 function listAvailableExports() {
-    if (!fs.existsSync(EXPORT_DIR)) {
+    const exportDir = getExportDir();
+    if (!fs.existsSync(exportDir)) {
         return [];
     }
     
-    const entries = fs.readdirSync(EXPORT_DIR, { withFileTypes: true });
+    const entries = fs.readdirSync(exportDir, { withFileTypes: true });
     return entries
         .filter(entry => entry.isDirectory())
         .map(entry => entry.name)
@@ -181,24 +186,29 @@ function listAvailableExports() {
 function importPresentation(dateInput, description) {
     console.log('🚀 Starting presentation import...\n');
     
+    const exportDir = getExportDir();
+    
     // Check if export directory exists
-    if (!fs.existsSync(EXPORT_DIR)) {
-        console.error(`❌ Export directory not found: ${EXPORT_DIR}`);
-        console.error('   Please check the path in import-presentation.js');
-        return;
+    if (!fs.existsSync(exportDir)) {
+        const error = `Export directory not found: ${exportDir}`;
+        console.error(`❌ ${error}`);
+        console.error('   Please check the path or set OBSIDIAN_EXPORT_DIR environment variable');
+        throw new Error(error);
     }
     
     // Format the date
     const dateStr = formatDate(dateInput || new Date().toLocaleDateString());
     if (!dateStr) {
-        console.error('❌ Invalid date format');
-        return;
+        const error = 'Invalid date format';
+        console.error(`❌ ${error}`);
+        throw new Error(error);
     }
     
     // Find the export folder with this date name
     const exportFolder = findExportFolder(dateStr);
     if (!exportFolder) {
-        console.error(`❌ Export folder not found: "${dateStr}"`);
+        const error = `Export folder not found: "${dateStr}"`;
+        console.error(`❌ ${error}`);
         console.error(`\n   Available export folders:`);
         const available = listAvailableExports();
         if (available.length > 0) {
@@ -206,15 +216,16 @@ function importPresentation(dateInput, description) {
         } else {
             console.error('     (no folders found)');
         }
-        console.error(`\n   Please check the export directory: ${EXPORT_DIR}`);
-        return;
+        console.error(`\n   Please check the export directory: ${exportDir}`);
+        throw new Error(error);
     }
     
     // Check for index.html in the export folder
     const exportIndexPath = path.join(exportFolder, 'index.html');
     if (!fs.existsSync(exportIndexPath)) {
-        console.error(`❌ index.html not found in: ${exportFolder}`);
-        return;
+        const error = `index.html not found in: ${exportFolder}`;
+        console.error(`❌ ${error}`);
+        throw new Error(error);
     }
     
     // Use date as folder name
@@ -223,9 +234,10 @@ function importPresentation(dateInput, description) {
     
     // Check if folder already exists
     if (fs.existsSync(targetFolder)) {
-        console.error(`❌ Folder "${folderName}" already exists in frassati-slides`);
+        const error = `Folder "${folderName}" already exists in frassati-slides`;
+        console.error(`❌ ${error}`);
         console.error('   Please remove it first or use a different date');
-        return;
+        throw new Error(error);
     }
     
     console.log(`📅 Date: ${dateStr}`);
@@ -274,7 +286,8 @@ function importPresentation(dateInput, description) {
             console.log('🧹 Cleaning up...');
             fs.rmSync(targetFolder, { recursive: true, force: true });
         }
-        process.exit(1);
+        // Re-throw the error so callers can handle it
+        throw error;
     }
 }
 

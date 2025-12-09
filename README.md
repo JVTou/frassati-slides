@@ -14,8 +14,9 @@ A collection of Reveal.js presentations for the Frassati group, with a centraliz
 frassati-slides/
 ├── index.html              # Main landing page with presentation links
 ├── netlify.toml           # Netlify deployment configuration
-├── add-presentation.js    # Helper script to add new presentations
 ├── import-presentation.js # Script to import from Obsidian export
+├── auto-import.js         # Script to auto-import all new presentations
+├── .github/workflows/     # GitHub Actions for automatic imports
 ├── DEPLOYMENT.md          # Detailed deployment instructions
 ├── README.md              # This file
 ├── dist/                  # Shared Reveal.js library files
@@ -28,9 +29,24 @@ frassati-slides/
 
 ## ➕ Adding New Presentations
 
-### Method 1: Import from Obsidian Export (Recommended)
+### Automatic Import (Recommended) ✨
 
-If you export from Obsidian to the default export directory, use the import script:
+**Presentations are automatically imported from your Obsidian-Vault repository!**
+
+When you push new exports to your Obsidian-Vault repository's `export/` directory, a GitHub Action will:
+- ✅ Automatically detect new date-named folders (e.g., "December 15th")
+- ✅ Import them to frassati-slides
+- ✅ Fix all paths to reference parent stylesheets
+- ✅ Add them to the main index.html
+- ✅ Commit and push the changes
+
+The workflow runs every hour, or you can trigger it manually from the Actions tab.
+
+**Setup:** See `.github/workflows/README.md` for configuration instructions.
+
+### Manual Import (Local Development)
+
+If you want to import locally before pushing:
 
 1. Export your presentation from Obsidian. The export should create a folder named like "December 15th" inside: `C:\Users\mctou\OneDrive\Documents\GitHub\Obsidian-Vault\export`
 2. Run the import script:
@@ -38,27 +54,12 @@ If you export from Obsidian to the default export directory, use the import scri
    node import-presentation.js "December 15th" "Weekly meeting updates"
    ```
    
-   Or without arguments to see available exports:
+   Or run auto-import to import all new presentations:
    ```bash
-   node import-presentation.js
+   node auto-import.js
    ```
 
-The script will:
-- ✅ Look for the date-named folder in the export directory
-- ✅ Copy `index.html` and `Attachments` folder to a new date folder in frassati-slides
-- ✅ Fix all paths to reference parent stylesheets (`../dist/`, `../plugin/`, `../css/`)
-- ✅ Add the new presentation to the main index.html
-
-### Method 2: Using the Helper Script
-
-1. Create a new folder for your presentation
-2. Add your `index.html` and other files
-3. Run the helper script:
-   ```bash
-   node add-presentation.js "Presentation Name" "Description" "folder-name"
-   ```
-
-### Method 3: Manual Addition
+### Manual Addition
 
 1. Create your presentation folder with all necessary files
 2. Edit `index.html` and add a new card above the template comment

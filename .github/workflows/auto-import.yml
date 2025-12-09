@@ -1,0 +1,55 @@
+name: Auto-Import Presentations
+
+on:
+  # Run on a schedule (every hour)
+  schedule:
+    - cron: '0 * * * *'  # Every hour at minute 0
+  # Allow manual triggering
+  workflow_dispatch:
+  # Also trigger when Obsidian-Vault repo is updated (via repository_dispatch)
+  repository_dispatch:
+    types: [obsidian-export-updated]
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout frassati-slides
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Checkout Obsidian-Vault
+        uses: actions/checkout@v4
+        with:
+          # If Obsidian-Vault is in the same org/user, use the same token
+          # Otherwise, set OBSIDIAN_VAULT_REPO and OBSIDIAN_VAULT_TOKEN secrets
+          repository: ${{ secrets.OBSIDIAN_VAULT_REPO || github.repository_owner + '/Obsidian-Vault' }}
+          path: obsidian-vault
+          token: ${{ secrets.OBSIDIAN_VAULT_TOKEN || github.token }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Run auto-import
+        env:
+          OBSIDIAN_EXPORT_DIR: ${{ github.workspace }}/obsidian-vault/export
+        run: |
+          node auto-import.js "$OBSIDIAN_EXPORT_DIR"
+      
+      - name: Commit and push changes
+        if: github.event_name != 'pull_request'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          if ! git diff --staged --quiet; then
+            git commit -m "Auto-import presentations from Obsidian-Vault [skip ci]"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+
