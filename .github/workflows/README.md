@@ -194,6 +194,22 @@ You can also trigger the workflow manually:
 - ✅ Check the Actions tab in Obsidian-Vault to see if the trigger workflow ran
 - ✅ Check the Actions tab in frassati-slides to see if it received the dispatch event
 
+**Problem: `fatal: No url found for submodule path 'obsidian-vault' in .gitmodules`**
+
+This happens when Git thinks `obsidian-vault` is a submodule but no URL is set. Fix it in **both** repos:
+
+- **In frassati-slides (this repo):** Remove the stale submodule reference and push:
+  ```bash
+  git config --remove-section submodule.obsidian-vault 2>nul || true
+  # If you have a .gitmodules file, edit it and remove the [submodule "obsidian-vault"] section, or delete .gitmodules if that was the only entry.
+  git add .gitmodules
+  git commit -m "Remove stale obsidian-vault submodule reference"
+  git push
+  ```
+- **In Obsidian-Vault:** Clone that repo, then do the same: remove `submodule.obsidian-vault` from `.git/config` and remove the `[submodule "obsidian-vault"]` block from `.gitmodules` (or delete `.gitmodules`), then commit and push.
+
+The workflow uses a plain `git clone` for Obsidian-Vault (not `actions/checkout`) so the second checkout’s cleanup no longer runs in that repo; fixing both repos removes the first checkout’s cleanup error.
+
 **Problem: I want to test locally first**
 
 You can test the import locally before relying on GitHub Actions:

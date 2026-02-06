@@ -39,14 +39,13 @@ jobs:
             echo "repo=${{ github.repository_owner }}/Obsidian-Vault" >> $GITHUB_OUTPUT
           fi
       
-      - name: Checkout Obsidian-Vault
-        uses: actions/checkout@v4
-        with:
-          # If Obsidian-Vault is in the same org/user, use the same token
-          # Otherwise, set OBSIDIAN_VAULT_REPO and OBSIDIAN_VAULT_TOKEN secrets
-          repository: ${{ steps.set-repo.outputs.repo }}
-          path: obsidian-vault
-          token: ${{ secrets.OBSIDIAN_VAULT_TOKEN || github.token }}
+      # Use git clone instead of actions/checkout to avoid "Post Checkout Obsidian-Vault"
+      # running submodule foreach in that repo (which can fail if it has a broken .gitmodules).
+      - name: Clone Obsidian-Vault
+        run: |
+          git clone --depth 1 \
+            "https://x-access-token:${{ secrets.OBSIDIAN_VAULT_TOKEN || github.token }}@github.com/${{ steps.set-repo.outputs.repo }}.git" \
+            obsidian-vault
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
