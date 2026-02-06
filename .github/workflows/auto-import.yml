@@ -17,18 +17,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      # Prevent "fatal: No url found for submodule path 'obsidian-vault' in .gitmodules"
-      # during Post job cleanup. We use a second checkout for Obsidian-Vault, not a submodule.
-      - name: Remove stale obsidian-vault submodule reference
-        run: |
-          git config --unset-all submodule.obsidian-vault.url 2>/dev/null || true
-          git config --unset-all submodule.obsidian-vault.active 2>/dev/null || true
-          git config --remove-section submodule.obsidian-vault 2>/dev/null || true
-          if [ -f .gitmodules ] && grep -q '\[submodule "obsidian-vault"\]' .gitmodules; then
-            git config -f .gitmodules --remove-section submodule.obsidian-vault 2>/dev/null || true
-            git add .gitmodules
-          fi
       
       - name: Set Obsidian-Vault repository name
         id: set-repo
