@@ -10,7 +10,8 @@ on:
 jobs:
   import:
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: write
     steps:
       - name: Checkout frassati-slides
         uses: actions/checkout@v4
