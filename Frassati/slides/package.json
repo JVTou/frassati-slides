@@ -1,0 +1,11 @@
+{
+  "name": "frassati-slides",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "preview": "npx serve dist -p 3000"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.2.3"
+  }
+}
