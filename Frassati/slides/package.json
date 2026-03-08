@@ -6,6 +6,6 @@
     "preview": "npx serve dist -p 3000"
   },
   "devDependencies": {
-    "@marp-team/marp-cli": "^4.2.3"
+    "marked": "^15.0.0"
   }
 }
