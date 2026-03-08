@@ -1,0 +1,5 @@
+# Build the slides app so every push (including new Meeting Notes) updates the site.
+[build]
+  base    = "Frassati/slides"
+  command = "npm run build"
+  publish = "dist"

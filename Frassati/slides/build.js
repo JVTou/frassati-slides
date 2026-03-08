@@ -82,7 +82,7 @@ async function generateTitle(content, firstHeading) {
 
 const REVEAL_CSS = 'https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css';
 const REVEAL_JS = 'https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js';
-const REVEAL_THEME = 'https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css';
+const REVEAL_THEME = 'https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/serif.css';
 
 function parseFrontmatter(content) {
   const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
@@ -145,12 +145,9 @@ function buildRevealHtml(title, sections) {
   <link rel="stylesheet" href="${REVEAL_CSS}" />
   <link rel="stylesheet" href="${REVEAL_THEME}" />
   <style>
-    .reveal { background: #f8f6f3; }
     .reveal .slides { text-align: left; }
     .reveal .slides section { text-align: left; }
     .reveal section img { background: none; border: none; box-shadow: none; max-height: 70vh; }
-    .reveal h1, .reveal h2, .reveal h3, .reveal p, .reveal li { color: #1a1a1a; }
-    .reveal a { color: #2c5aa0; }
   </style>
 </head>
 <body>
