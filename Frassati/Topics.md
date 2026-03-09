@@ -2,7 +2,7 @@
 date created: Thursday, July 24th 2025, 6:45:50 pm
 date modified: Saturday, October 11th 2025, 12:22:27 pm
 ---
-**Catholic Political Engagement: Integralism vs. Pragmatism**
+Catholic Political Engagement: Integralism vs. Pragmatism
 
 - In a secular democracy, should a Catholic's goal be the establishment of a "Social Kingship of Christ" (Catholic Integralism), or is it more practical to work within the existing system and vote for the "lesser of two evils"?
 
